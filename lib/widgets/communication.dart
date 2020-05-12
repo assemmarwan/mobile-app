@@ -17,21 +17,32 @@ class Communication extends StatefulWidget {
 class _CommunicationState extends State<Communication> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              CommentInput(
-                doctype: widget.doctype,
-                name: widget.name,
-                authorEmail: "Administrator", //TODO: remove hardcoded
-                callback: widget.callback,
+    return LayoutBuilder(
+      builder: (context, constraint) {
+        return SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(minHeight: constraint.maxHeight),
+            child: IntrinsicHeight(
+              child: Column(
+                children: <Widget>[
+                  Flexible(
+                    flex: 2,
+                    child: CommentInput(
+                      doctype: widget.doctype,
+                      name: widget.name,
+                      authorEmail: "Administrator",
+                      callback: widget.callback,
+                    ),
+                  ),
+                  Flexible(
+                      flex: 8,
+                      child: Timeline(widget.docInfo, widget.callback)),
+                ],
               ),
-              Timeline(widget.docInfo, widget.callback),
-            ]),
-      ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:support_app/utils/http.dart';
+import 'package:support_app/widgets/editor_page.dart';
 
 class CommentInput extends StatelessWidget {
   final String doctype;
@@ -70,9 +71,7 @@ class CommentInput extends StatelessWidget {
               ],
             ),
           ),
-          TextField(
-            controller: input,
-          ),
+          Flexible(child: EditorPage()),
         ],
       ),
     );
